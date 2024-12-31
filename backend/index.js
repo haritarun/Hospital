@@ -20,7 +20,15 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
-mongoose.connect('mongodb://127.0.0.1:27017/register');
+
+
+mongoose.connect('mongodb://127.0.0.1:27017/register', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('Database connected successfully!'))
+  .catch((error) => console.error('Database connection error:', error));
+
 
 
 const activeUsers = new Map();
